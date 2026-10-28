@@ -7,7 +7,7 @@ import py3Dmol
 import streamlit as st
 import streamlit.components.v1 as components
 from rdkit import Chem
-from rdkit.Chem import AllChem, Crippen, Descriptors, Draw, Lipinski, rdMolDescriptors
+from rdkit.Chem import AllChem, Crippen, Descriptors, Draw, Lipinski, rdMolDescriptors 
 
 
 ROOT = Path(__file__).parent
