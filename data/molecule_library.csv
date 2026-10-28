@@ -1,0 +1,14 @@
+Molecule,SMILES,Family,Context
+Aspirin,CC(=O)Oc1ccccc1C(=O)O,Pharmaceutical examples,Aromatic ester and carboxylic acid
+Caffeine,Cn1c(=O)c2c(ncn2C)n(C)c1=O,Natural products,Xanthine alkaloid scaffold
+Citric acid,O=C(O)CC(O)(CC(=O)O)C(=O)O,Food and biomolecules,Hydroxy tricarboxylic acid
+Ibuprofen,CC(C)Cc1ccc(cc1)[C@@H](C)C(=O)O,Pharmaceutical examples,Arylpropionic acid with a stereocenter
+Vanillin,COc1cc(C=O)ccc1O,Food and fragrance,Aromatic aldehyde with methoxy and hydroxy groups
+Nicotinamide,NC(=O)c1cccnc1,Biomolecules,Pyridine carboxamide
+Limonene,CC1=CCC(CC1)C(=C)C,Natural products,Cyclic terpene
+Lactic acid,C[C@H](O)C(=O)O,Biomolecules,Chiral alpha-hydroxy acid
+Acetaminophen,CC(=O)Nc1ccc(O)cc1,Pharmaceutical examples,Phenol and amide functional groups
+Benzocaine,CCOC(=O)c1ccc(N)cc1,Pharmaceutical examples,Aromatic ester and amine
+Urea,NC(N)=O,Biomolecules,Simple carbonyl compound with two amino groups
+Sodium benzoate,O=C([O-])c1ccccc1.[Na+],Food and materials,Aromatic carboxylate salt
+Ethyl acetate,CCOC(=O)C,Solvents and materials,Small ester solvent
