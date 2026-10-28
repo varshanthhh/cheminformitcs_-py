@@ -1,4 +1,5 @@
 from collections import Counter
+import base64
 from pathlib import Path
 
 import pandas as pd
@@ -11,6 +12,16 @@ from rdkit.Chem import AllChem, Crippen, Descriptors, Draw, Lipinski, rdMolDescr
 
 ROOT = Path(__file__).parent
 DATA_FILE = ROOT / "data" / "molecule_library.csv"
+
+
+def svg_data_uri(path):
+    """Embed a project SVG safely in Streamlit's custom HTML blocks."""
+    encoded = base64.b64encode(path.read_bytes()).decode("ascii")
+    return f"data:image/svg+xml;base64,{encoded}"
+
+
+MASCOT_LOGO = svg_data_uri(ROOT / "assets" / "chematlas_mascot.svg")
+ATOM_LOGO = svg_data_uri(ROOT / "assets" / "atom_companion.svg")
 
 st.set_page_config(
     page_title="ChemAtlas | Chemistry Workspace",
@@ -43,10 +54,17 @@ st.markdown(
         background: linear-gradient(120deg, #173b33 0%, #245a43 68%, #64844b 100%);
         color: #f7f8ef; border-radius: 22px; padding: 2.3rem 2.5rem;
         margin: .5rem 0 1.5rem 0; box-shadow: 0 15px 40px rgba(18, 53, 42, .12);
+        position: relative; overflow: hidden; min-height: 255px;
     }
     .hero h1 { color: #fbfff1; font-size: clamp(2.3rem, 5vw, 4.2rem); margin: .4rem 0; }
-    .hero p { color: #dce9d7; font-size: 1.05rem; max-width: 740px; }
+    .hero p { color: #dce9d7; font-size: 1.05rem; max-width: 650px; }
     .hero-tag { color: #d9ef8b; font-weight: 800; letter-spacing: .14em; font-size: .76rem; }
+    .hero-copy { position: relative; z-index: 2; max-width: 72%; }
+    .hero-mascot { position: absolute; width: 230px; right: 3%; bottom: -18px; z-index: 1; filter: drop-shadow(0 12px 15px rgba(8, 25, 19, .22)); }
+    .sidebar-brand { display: flex; align-items: center; gap: .75rem; margin: .2rem 0 .4rem; }
+    .sidebar-brand img { width: 54px; height: 54px; border-radius: 16px; background: #d9ef8b; }
+    .sidebar-brand strong { display: block; color: #f8ffef; font-size: 1.1rem; }
+    .sidebar-brand span { display: block; color: #bed1c4; font-size: .72rem; letter-spacing: .11em; text-transform: uppercase; }
     .panel {
         background: var(--card); border: 1px solid var(--line); border-radius: 16px;
         padding: 1rem 1.15rem; margin: .25rem 0 .75rem 0;
@@ -57,6 +75,11 @@ st.markdown(
     }
     .stButton > button[kind="primary"] { background: #174b3a; }
     code { color: #174b3a !important; }
+    @media (max-width: 720px) {
+        .hero { padding: 1.7rem 1.3rem; }
+        .hero-copy { max-width: 100%; }
+        .hero-mascot { width: 115px; opacity: .24; right: 1%; bottom: -4px; }
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -214,7 +237,10 @@ def navigate_to(destination):
 
 
 with st.sidebar:
-    st.markdown("## ⚗️ ChemAtlas")
+    st.markdown(
+        f'<div class="sidebar-brand"><img src="{ATOM_LOGO}" alt="ChemAtlas anime atom mascot"><div><strong>ChemAtlas</strong><span>molecule club</span></div></div>',
+        unsafe_allow_html=True,
+    )
     st.caption("A small workspace for chemical structure and data.")
     page = st.radio(
         "WORKSPACE",
@@ -237,12 +263,15 @@ with st.sidebar:
 
 if page == "Overview":
     st.markdown(
-        """
+        f"""
         <div class="hero">
-          <div class="hero-tag">CHEMISTRY · DATA · DISCOVERY</div>
-          <h1>Explore the language<br>of molecules.</h1>
-          <p>Turn a SMILES string into a structure, a set of interpretable descriptors,
-          or a quick comparison. Then check whether a reaction conserves its atoms.</p>
+          <div class="hero-copy">
+            <div class="hero-tag">CHEMISTRY · DATA · DISCOVERY</div>
+            <h1>Explore the language<br>of molecules.</h1>
+            <p>Turn a SMILES string into a structure, a set of interpretable descriptors,
+            or a quick comparison. Then check whether a reaction conserves its atoms.</p>
+          </div>
+          <img class="hero-mascot" src="{MASCOT_LOGO}" alt="Original anime-inspired ChemAtlas lab mascot">
         </div>
         """,
         unsafe_allow_html=True,
@@ -442,4 +471,5 @@ elif page == "Learn":
             st.warning("Choose an answer first.")
         else:
             st.info("Not quite. In SMILES, matching digits indicate a ring closure.")
+
 
