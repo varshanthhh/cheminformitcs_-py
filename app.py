@@ -341,7 +341,7 @@ elif page == "Molecule studio":
             metric_cols[1].metric("Calculated LogP", f"{properties['Calculated LogP']:.2f}")
             metric_cols[2].metric("TPSA", f"{properties['Topological polar surface area (Å²)']:.1f} Å²")
             property_df = pd.DataFrame(
-                [{"Property": name, "Value": value} for name, value in properties.items()]
+                [{"Property": name, "Value": str(value)} for name, value in properties.items()]
             )
             st.dataframe(property_df, use_container_width=True, hide_index=True)
             csv = pd.DataFrame([{"Input SMILES": smiles, "Canonical SMILES": Chem.MolToSmiles(molecule), **properties}]).to_csv(index=False).encode("utf-8")
