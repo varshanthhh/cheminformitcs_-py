@@ -2,6 +2,8 @@
 
 ChemAtlas is a Streamlit learning workspace for exploring molecular structures and simple cheminformatics. It includes a new 13-molecule reference library, an interactive molecule studio, descriptor comparison, and a reaction atom-balance checker.
 
+[Open the live ChemAtlas app](https://cheminformitcs-py-fymbnlhvksxvkirpk7jsjq.streamlit.app/)
+
 ## Run locally
 
 1. Install Python 3.10 or newer.
